@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('code/data_generator.py')
+    fetch('http://localhost:5000/generate-data')
         .then(response => response.json())
         .then(data => {
             fetch('data_processor.php', {
