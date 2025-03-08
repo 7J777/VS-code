@@ -1,0 +1,29 @@
+name: Setup and Run Flask Server
+
+on: [push]
+
+jobs:
+  setup-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install Flask and Run Server
+      run: |
+        if ! pip show flask > /dev/null 2>&1; then
+            echo "Flask n'est pas installé. Installation de Flask..."
+            pip install flask
+        else
+            echo "Flask est déjà installé."
+        fi
+
+        # Lancer le serveur Flask
+        echo "Lancement du serveur Flask..."
+        nohup python3 server.py &
