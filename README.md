@@ -42,9 +42,6 @@ To get started with this project, follow these steps:
 - `docs/`: Contains the documentation and the web interface.
   - `index.html`: The main HTML file for the web interface.
 
-## Contributing
-
-Contributions are welcome! Please follow the guidelines in the [CONTRIBUTING.md](CONTRIBUTING.md) file.
 
 ## License
 
