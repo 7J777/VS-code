@@ -1,0 +1,46 @@
+with Ada.Text_IO; use Ada.Text_IO;
+with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
+with Ada.Float_Text_IO; use Ada.Float_Text_IO;
+with Ada.Calendar; use Ada.Calendar;
+with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
+
+procedure Data_Generator is
+   package Unbounded_IO is new Ada.Text_IO.Unbounded_IO (Ada.Strings.Unbounded);
+   use Unbounded_IO;
+
+   type Data_Item is record
+      ID    : Integer;
+      Value : Integer;
+   end record;
+
+   Data : array (1 .. 10) of Data_Item;
+
+   function Random (Low, High : Integer) return Integer is
+   begin
+      return Low + Integer (Float (High - Low + 1) * Ada.Numerics.Float_Random);
+   end Random;
+
+   JSON_String : Unbounded_String := To_Unbounded_String ("[\n");
+
+begin
+   Ada.Numerics.Float_Randomize;
+
+   for I in Data'Range loop
+      Data (I).ID := I - 1;
+      Data (I).Value := Random (0, 99);
+      JSON_String := JSON_String & To_Unbounded_String
+         (Ada.Strings.Unbounded.Image (Data (I).ID) & ", " &
+          Ada.Strings.Unbounded.Image (Data (I).Value) & " }" &
+          (if I < Data'Last then "," else "") & "\n");
+   end loop;
+
+   JSON_String := JSON_String & To_Unbounded_String ("]");
+
+   declare
+      File : File_Type;
+   begin
+      Create (File, Out_File, "data.json");
+      Put (File, JSON_String);
+      Close (File);
+   end;
+end Data_Generator;
