@@ -1,9 +1,12 @@
-name: Setup and Run Flask Server
+name: Deploy to GitHub Pages
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
-  setup-and-run:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -27,3 +30,9 @@ jobs:
         # Lancer le serveur Flask
         echo "Lancement du serveur Flask..."
         nohup python3 server.py &
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
