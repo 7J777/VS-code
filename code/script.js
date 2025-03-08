@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    fetch('data_generator.py')
+    fetch('code/data_generator.py')
         .then(response => response.json())
         .then(data => {
             fetch('data_processor.php', {
