@@ -21,10 +21,33 @@ jobs:
       with:
         python-version: '3.x'  # Specify your Python version
 
+    - name: Cache dependencies
+      uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt  # Ensure you have a requirements.txt file
 
+    - name: Run tests
+      run: |
+        python -m unittest discover -s tests  # Ensure you have a tests directory
+
     - name: Run code
       run: python Code.py  # Change this to the path of your main script
+
+    - name: Notify on failure
+      if: failure()
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_CHANNEL: your-channel-name
+        SLACK_COLOR: danger
+        SLACK_MESSAGE: 'Code execution failed!'
+        SLACK_TITLE: 'Workflow Failure'
+        SLACK_USERNAME: 'GitHub Actions'
