@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data>
+    <item>
+        <id>0</id>
+        <value>42</value>
+    </item>
+    <item>
+        <id>1</id>
+        <value>37</value>
+    </item>
+    <item>
+        <id>2</id>
+        <value>85</value>
+    </item>
+    <item>
+        <id>3</id>
+        <value>29</value>
+    </item>
+    <item>
+        <id>4</id>
+        <value>93</value>
+    </item>
+    <item>
+        <id>5</id>
+        <value>58</value>
+    </item>
+    <item>
+        <id>6</id>
+        <value>77</value>
+    </item>
+    <item>
+        <id>7</id>
+        <value>14</value>
+    </item>
+    <item>
+        <id>8</id>
+        <value>66</value>
+    </item>
+    <item>
+        <id>9</id>
+        <value>50</value>
+    </item>
+</data>

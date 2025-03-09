@@ -1,0 +1,13 @@
+import pandas as pd
+import random
+
+# Générer des données aléatoires
+data = [{'ID': i, 'Value': random.randint(0, 99)} for i in range(10)]
+
+# Créer un DataFrame
+df = pd.DataFrame(data)
+
+# Enregistrer les données dans un fichier Excel
+df.to_excel('data.xlsx', index=False)
+
+print("Data generated and saved to data.xlsx")
